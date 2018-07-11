@@ -34,11 +34,11 @@ fpm:
     # - DB_USERNAME=gyang
     # - DB_PASSWORD=479283
   links:
-    - mysql:mysql
+    - mysql
 
 # database
 mysql:
-  image: mysql:latest
+  image: mariadb:latest
   ports:
     # Allow client to access 3306
     - "3306:3306"
@@ -47,4 +47,4 @@ mysql:
     - ./mysql/data:/var/lib/mysql
     #- ./mysql/my.cnf:/etc/mysql/conf.d/docker.cnf
   environment:
-    - MYSQL_ROOT_PASSWORD=
+    - MYSQL_ROOT_PASSWORD=test1234
