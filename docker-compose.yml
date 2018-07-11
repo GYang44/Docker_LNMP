@@ -6,7 +6,7 @@ nginx:
     - "443:443"
   volumes:
     # app
-    - ./app/src:/usr/share/nginx/html
+    - ./app/src:/usr/share/nginx/html:z 
     # nginx configs
     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     - ./nginx/conf.d/:/etc/nginx/conf.d/:ro
@@ -18,11 +18,12 @@ nginx:
 
 # php-fpm
 fpm:
-  build: ./php-fpm
+  #build: ./php-fpm
+  image: php:fpm
   ports:
     - "9000"
   volumes:
-    - ./app/src:/usr/share/nginx/html
+    - ./app/src:/usr/share/nginx/html:z 
     # Your php.ini
     - ./php-fpm/php.ini-production:/usr/local/etc/php/php.ini:ro
   #environment:
@@ -34,7 +35,7 @@ fpm:
     # - DB_USERNAME=gyang
     # - DB_PASSWORD=479283
   links:
-    - mysql:mysql
+    - mysql
 
 # database
 mysql:
@@ -47,4 +48,4 @@ mysql:
     - ./mysql/data:/var/lib/mysql
     #- ./mysql/my.cnf:/etc/mysql/conf.d/docker.cnf
   environment:
-    - MYSQL_ROOT_PASSWORD=
+    - MYSQL_ROOT_PASSWORD=test1234
