@@ -18,34 +18,29 @@ nginx:
 
 # php-fpm
 fpm:
-  #build: ./php-fpm
-  image: php:fpm
+  build: ./php-fpm
+  #image: php:fpm
   ports:
     - "9000"
   volumes:
     - ./app/src:/usr/share/nginx/html:z 
     # Your php.ini
     - ./php-fpm/php.ini-production:/usr/local/etc/php/php.ini:ro
-  #environment:
-    # Set your APP env variables here:
-    # - APP_KEY=
-    # - DB_PORT=3306
-    # - DB_HOST=127.0.0.1
-    # - DB_DATABASE=ttRss
-    # - DB_USERNAME=gyang
-    # - DB_PASSWORD=479283
   links:
     - mysql
 
 # database
 mysql:
-  image: mariadb:latest
+  image: mysql:latest
   ports:
     # Allow client to access 3306
     - "3306:3306"
   volumes:
     # NOTE: your data will be stored in ./mysql
     - ./mysql/data:/var/lib/mysql
-    #- ./mysql/my.cnf:/etc/mysql/conf.d/docker.cnf
+    - ./mysql/my.cnf:/etc/mysql/conf.d/add.cnf:ro
   environment:
-    - MYSQL_ROOT_PASSWORD=test1234
+    - MYSQL_ROOT_PASSWORD=
+    - MYSQL_DATABASE=
+    - MYSQL_USER=
+    - MYSQL_PASSWORD=
