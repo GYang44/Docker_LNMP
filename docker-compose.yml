@@ -21,7 +21,7 @@ fpm:
   build: ./php-fpm
   #image: php:fpm
   ports:
-    - "9000"
+    - "9000:9000"
   volumes:
     - ./app/src:/usr/share/nginx/html:z 
     # Your php.ini
