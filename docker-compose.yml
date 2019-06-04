@@ -15,6 +15,7 @@ nginx:
     - ./certs/privkey.pem:/etc/nginx/privkey.pem:ro
   links:
     - fpm:__DOCKER_PHP_FPM__
+  restart: unless-stopped
 
 # php-fpm
 fpm:
@@ -28,6 +29,7 @@ fpm:
     - ./php-fpm/php.ini-production:/usr/local/etc/php/php.ini:ro
   links:
     - mysql
+  restart: unless-stopped
 
 # database
 mysql:
@@ -44,3 +46,4 @@ mysql:
     - MYSQL_DATABASE=
     - MYSQL_USER=
     - MYSQL_PASSWORD=
+  restart: unless-stopped
